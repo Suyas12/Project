@@ -1,0 +1,10 @@
+package com.app.services;
+
+import java.util.List;
+
+public interface CustomerService {
+    BookingDto getBookingDetails(Long bookingId);
+    BookingDto createBooking(BookingDto bookingDto);
+    void cancelBooking(Long bookingId);
+}
+

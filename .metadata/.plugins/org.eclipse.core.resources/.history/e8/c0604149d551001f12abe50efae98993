@@ -1,0 +1,103 @@
+package com.app.entities;
+
+import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
+
+
+@Entity
+@Table(name = "bookings")
+public class Bookings {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bookingId;
+    @CreationTimestamp
+    private Date bookingDate;
+    private Date checkInDate;
+    private Date checkOutDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "userid")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id", referencedColumnName = "hotelId")
+    private Hotels hotel;
+    
+    @OneToOne
+    @JoinColumn(name = "payment_id", referencedColumnName = "paymentId")
+    private Payments payments;
+
+    public Bookings() {}
+
+    public Bookings(Date bookingDate, Date checkInDate, Date checkOutDate, User user, Hotels hotel) {
+        this.bookingDate = bookingDate;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.user = user;
+        this.hotel = hotel;
+    }
+
+    // Getters and Setters
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Hotels getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotels hotel) {
+        this.hotel = hotel;
+    }
+
+    @Override
+    public String toString() {
+        return "Bookings{" +
+                "bookingId=" + bookingId +
+                ", bookingDate=" + bookingDate +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", user=" + user +
+                ", hotel=" + hotel +
+                '}';
+    }
+}

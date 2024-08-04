@@ -1,0 +1,56 @@
+package com.app.services;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.dto.BookingDto;
+import com.app.entities.Bookings;
+import com.app.repository.CustomerRepository;
+
+import java.util.Date;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+    
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public BookingDto getBookingDetails(Long bookingId) {
+        Bookings booking = customerRepository.findById(bookingId).orElse(null);
+        if (booking == null) {
+            return null; // Handle not found case as needed
+        }
+
+        BookingDto bookingDto = modelMapper.map(booking, BookingDto.class);
+        // Set additional details not directly mapped
+        bookingDto.setHotelName(booking.getHotel().gethotel_name());
+        bookingDto.setRoomNumber(booking.getRoom().getRoomNumber());
+        bookingDto.setRoomType(booking.getRoom().getRoomType());
+        bookingDto.setCity(booking.getHotel().getLocation().getCity());
+        bookingDto.setState(booking.getHotel().getLocation().getState());
+        bookingDto.setAmount(customerRepository.findById(bookingId).orElse(null).getPayments().get(0).getAmount());
+        bookingDto.setPaymentDate(customerRepository.findById(bookingId).orElse(null).getPayments().get(0).getPaymentDate());
+
+        return bookingDto;
+    }
+
+    @Override
+    public BookingDto createBooking(BookingDto bookingDto) {
+        Bookings booking = modelMapper.map(bookingDto, Bookings.class);
+        // Set additional details not directly mapped
+        booking.setBookingDate(new Date());
+        booking = customerRepository.save(booking);
+        return modelMapper.map(booking, BookingDto.class);
+    }
+
+    @Override
+    public void cancelBooking(int bookingId) {
+        customerRepository.deleteById(bookingId);
+    }
+}
+

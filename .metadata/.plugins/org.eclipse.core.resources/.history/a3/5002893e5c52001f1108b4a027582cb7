@@ -1,0 +1,66 @@
+package com.app.services;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.dto.BookingDto;
+import com.app.entities.Bookings;
+import com.app.repository.CustomerRepository;
+
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import java.util.Date;
+
+@Service
+@Transactional
+public class CustomerServiceImpl implements CustomerService {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public BookingDto getBookingDetails(Long bookingId) {
+        Optional<Bookings> bookingOpt = customerRepository.findById(bookingId);
+        if (bookingOpt.isPresent()) {
+            Bookings booking = bookingOpt.get();
+            BookingDto bookingDto = modelMapper.map(booking, BookingDto.class);
+            bookingDto.setHotelName(booking.getHotel().getHotel_name());
+            bookingDto.setRoomNumber(booking.getRoom().getRoomNumber());
+            bookingDto.setRoomType(booking.getRoom().getRoomType());
+            bookingDto.setCity(booking.getHotel().getLocations().getCity());
+            bookingDto.setState(booking.getHotel().getLocations().getState());
+            bookingDto.setAmount(booking.getPayments().getAmount());
+            bookingDto.setPaymentDate(booking.getPayments().getPaymentDate());
+            return bookingDto;
+        }
+        return null; // Handle not found case as needed
+    }
+
+    @Override
+    public BookingDto createBooking(BookingDto bookingDto) {
+        Bookings booking = modelMapper.map(bookingDto, Bookings.class);
+        booking.setBookingDate(new Date());
+        booking = customerRepository.save(booking);
+        BookingDto savedBookingDto = modelMapper.map(booking, BookingDto.class);
+        savedBookingDto.setHotelName(booking.getHotel().getHotel_name());
+        savedBookingDto.setRoomNumber(booking.getRoom().getRoomNumber());
+        savedBookingDto.setRoomType(booking.getRoom().getRoomType());
+        savedBookingDto.setCity(booking.getHotel().getLocations().getCity());
+        savedBookingDto.setState(booking.getHotel().getLocations().getState());
+        savedBookingDto.setAmount(booking.getPayments().getAmount());
+        savedBookingDto.setPaymentDate(booking.getPayments().getPaymentDate());
+        return customerRepository.save(savedBookingDto);
+    }
+
+    @Override
+    public void cancelBooking(Long bookingId) {
+        customerRepository.deleteById(bookingId);
+    }
+}
+

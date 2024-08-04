@@ -1,0 +1,55 @@
+package com.app.entities;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "hotels")
+public class Hotels {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int hotelId;
+    private String ownerName;
+    private String name;
+
+    public Hotels() {}
+
+    public Hotels(String ownerName, String name) {
+        this.ownerName = ownerName;
+        this.name = name;
+    }
+
+    // Getters and Setters
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotels{" +
+                "hotelId=" + hotelId +
+                ", ownerName='" + ownerName + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+

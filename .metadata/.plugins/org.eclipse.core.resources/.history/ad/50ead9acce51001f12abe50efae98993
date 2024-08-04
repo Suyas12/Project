@@ -1,0 +1,107 @@
+package com.app.dto;
+
+import java.util.Date;
+
+public class BookingDto {
+    private Long bookingId;
+    private Date bookingDate;
+    private Date checkInDate;
+    private Date checkOutDate;
+    private String hotelName;
+    private String roomNumber;
+    private String roomType;
+    private String city;
+    private String state;
+    private double amount;
+    private Date paymentDate;
+
+    // Getters and Setters
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+}
+

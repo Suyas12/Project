@@ -1,0 +1,28 @@
+package com.app.entities;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "hotels")
+public class Hotels {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long hotelId;
+    private String owner_name;
+    private String hotel_name;
+    
+	@ManyToOne
+	@JoinColumn(name = "location_id", referencedColumnName = "locationId")
+	private Locations locations;
+	
+	@ManyToOne
+	@JoinColumn(name = "location_id", referencedColumnName = "locationId")
+	private Room room;
+
+    public Hotels() {}
+
+	
+
+    
+}
+

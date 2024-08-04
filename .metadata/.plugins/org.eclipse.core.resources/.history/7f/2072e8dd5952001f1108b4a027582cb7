@@ -1,0 +1,39 @@
+package com.app.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.entities.Hotels;
+import com.app.entities.Locations;
+import com.app.entities.Room;
+import com.app.repository.HotelRepository;
+import com.app.repository.LocationRepository;
+import com.app.repository.RoomRepository;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @Override
+    public Hotels addHotel(Hotels hotel) {
+        return hotelRepository.save(hotel);
+    }
+
+    @Override
+    public Locations addLocation(Locations location) {
+        return locationRepository.save(location);
+    }
+
+    @Override
+    public Room addRoom(Room room) {
+        return roomRepository.save(room);
+    }
+}

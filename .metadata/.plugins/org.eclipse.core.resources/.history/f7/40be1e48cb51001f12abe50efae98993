@@ -1,0 +1,55 @@
+package com.app.entities;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "hotels")
+public class Hotels {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long hotelId;
+    private String owner_name;
+    private String hotel_name;
+
+    public Hotels() {}
+
+    public Hotels(String owner_name, String hotel_name) {
+        this.owner_name = owner_name;
+        this.hotel_name = hotel_name;
+    }
+
+    // Getters and Setters
+    public Long getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public String getOwnerhotel_name() {
+        return ownerhotel_name;
+    }
+
+    public void setOwnerhotel_name(String ownerhotel_name) {
+        this.ownerhotel_name = ownerhotel_name;
+    }
+
+    public String gethotel_name() {
+        return hotel_name;
+    }
+
+    public void sethotel_name(String hotel_name) {
+        this.hotel_name = hotel_name;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotels{" +
+                "hotelId=" + hotelId +
+                ", ownerhotel_name='" + ownerhotel_name + '\'' +
+                ", hotel_name='" + hotel_name + '\'' +
+                '}';
+    }
+}
+

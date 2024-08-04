@@ -1,0 +1,29 @@
+package com.app.services;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @Override
+    public Hotel addHotel(Hotel hotel) {
+        return hotelRepository.save(hotel);
+    }
+
+    @Override
+    public Location addLocation(Location location) {
+        return locationRepository.save(location);
+    }
+
+    @Override
+    public Room addRoom(Room room) {
+        return roomRepository.save(room);
+    }
+}

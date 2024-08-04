@@ -1,0 +1,28 @@
+package com.app.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
+
+    @PostMapping("/hotels")
+    public Hotel addHotel(@RequestBody Hotel hotel) {
+        return adminService.addHotel(hotel);
+    }
+
+    @PostMapping("/locations")
+    public Location addLocation(@RequestBody Location location) {
+        return adminService.addLocation(location);
+    }
+
+    @PostMapping("/rooms")
+    public Room addRoom(@RequestBody Room room) {
+        return adminService.addRoom(room);
+    }
+}
